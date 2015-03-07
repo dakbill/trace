@@ -1,0 +1,19 @@
+<div class="row">
+	<h1>Welcome to Trace</h1>
+	<hr>
+	<fieldset>
+		<%= raw(flash[:message]) %>
+		<%= form_for @user ,url: sign_in_path  do |user|%>
+			<div class="form-group">
+				<label>Username</label>
+				<%= user.text_field :username, :class => 'form-control' %>
+				
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<%= user.password_field :password, :class => 'form-control' %>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		<% end %>
+	</fieldset>
+</div>
