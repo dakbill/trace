@@ -1,23 +1,24 @@
 
 <div class="row">
 	<div class="col-lg-3 ">
-		<table class="table table-hover">
-			<thead>
-				<tr><th>Data Sets</th></tr>
-			</thead>
-			<tbody>
-				<% if @data_sets.empty? %>
-					<tr><td>No Datasets</td></tr>
-				<% else %>
-					<% @data_sets.each do |data_set| %>
-						<tr><td data-id="<%= data_set.id %>" onclick="render(this)"><%= data_set.name %></td></tr>
-					<%end%>
-				<% end %>
-				
-			</tbody>
-		</table>
+		<h4>Data Sets</h4>
+		<div style="height:500px;overflow-y:scroll">
+			<table class="table table-hover">
+				<tbody >
+					<% if @data_sets.empty? %>
+						<tr style="cursor:pointer" ><td >No Datasets</td></tr>
+					<% else %>
+						<% @data_sets.each do |data_set| %>
+							<tr style="cursor:pointer" ><td data-uuid="<%= data_set.uuid %>" onclick="render(this)"><%= data_set.name %></td></tr>
+						<%end%>
+					<% end %>
+					
+				</tbody>
+			</table>	
+		</div>
+		
 	</div>
-	<div class="col-lg-8  graph" >
+	<div class="col-lg-9  graph" >
 		
 	</div>
   
@@ -27,14 +28,16 @@
 </div>
 <script type="text/javascript">
 	function render(obj){
-		var id = $( obj ).data( "id");
-		alert(id);
+		var uuid = $( obj ).data( "uuid");
+		$.getJSON('/datasets/'+uuid,function(data){
+			console.log(data);
+		});
 	}
 </script>
 <script type="text/javascript">
 	var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 700 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    width = ($(window).width()*0.518) - margin.left - margin.right,
+    height = ($(window).height()*0.716) - margin.top - margin.bottom;
 
 	var parseDate = d3.time.format("%d-%b-%y").parse;
 
@@ -84,7 +87,7 @@
 	      .attr("y", 6)
 	      .attr("dy", ".71em")
 	      .style("text-anchor", "end")
-	      .text("Price ($)");
+	      .text("<%= @parameter %>");
 
 	  svg.append("path")
 	      .datum(data)

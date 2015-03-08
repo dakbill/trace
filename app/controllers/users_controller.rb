@@ -12,7 +12,14 @@ class UsersController < ApplicationController
 	def trace_data
 		@title = 'Graphs'
 		@user = User.find_by_username(session[:username])
-		@data_sets = DataSet.all
+		@data_sets = @user.data_sets.all
+		@first_data = @data_sets
+								.first
+								.data_stamps
+								.order('record_time')
+		@parameter = @first_data.first.parameter
+		@unit = @first_data.first.unit
+		@first_data = @first_data.pluck('record_time','sensor_value')
 	end
 	
 	def sign_in
