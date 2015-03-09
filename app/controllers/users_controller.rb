@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 			@data_stamps = @first_data
 								.data_stamps
 								.order(:record_time)
-								.group(:record_time)
+								
 			if @data_stamps
 				@parameter = @data_stamps.first.parameter
 				@unit = @data_stamps.first.unit
