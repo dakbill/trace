@@ -4,9 +4,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 # Use sqlite3 as the database for Active Record
-group :development, :test do 
-  gem 'sqlite3'
-end
+gem 'sqlite3', group: :development
+
 gem 'pg','0.17.1', group: :production
 #Include 'rails_12factor' gem to enable all platform features
 gem 'rails_12factor', group: :production

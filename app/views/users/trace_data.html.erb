@@ -9,7 +9,7 @@
 						<tr style="cursor:pointer" ><td >No Datasets</td></tr>
 					<% else %>
 						<% @data_sets.each do |data_set| %>
-							<tr style="cursor:pointer" ><td data-uuid="<%= data_set.uuid %>" onclick="render(this)"><%= data_set.name %></td></tr>
+							<tr style="cursor:pointer" ><td data-id="<%= data_set.id %>" onclick="render(this)"><%= data_set.name %></td></tr>
 						<%end%>
 					<% end %>
 					
@@ -28,8 +28,8 @@
 </div>
 <script type="text/javascript">
 	function render(obj){
-		var uuid = $( obj ).data( "uuid");
-		$.getJSON('/datasets/'+uuid,function(data){
+		var id = $( obj ).data( "id");
+		$.getJSON('/datasets/'+id ,function(data){
 			console.log(data);
 		});
 	}

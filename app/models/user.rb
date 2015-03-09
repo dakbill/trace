@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 		user = User.find_by_username(user_details[:username])
 		return nil if user.nil?
 		return user if user.has_password?(user_details[:password])
-		return nill
+		return nil
 	end
 
 	def has_password?(submitted_password)
